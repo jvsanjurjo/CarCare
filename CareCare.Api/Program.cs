@@ -1,8 +1,13 @@
+using CarCare.Application;
+using CarCare.Infraestructure;
 using CareCare.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddPresentation();
+    builder.Services
+        .AddPresentation()
+        .AddApplication()
+        .AddInfraestructure(builder.Configuration);
 }
 
 var app = builder.Build();

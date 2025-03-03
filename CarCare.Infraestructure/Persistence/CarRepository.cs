@@ -1,10 +1,5 @@
 ﻿using CarCare.Application.Common.Interfaces.Persistence;
 using CarCare.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CarCare.Infraestructure.Persistence
 {
