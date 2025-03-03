@@ -3,9 +3,6 @@ using CareCare.Api;
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddPresentation();
-    builder.Services.AddControllers();
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
 }
 
 var app = builder.Build();
