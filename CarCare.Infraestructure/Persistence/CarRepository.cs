@@ -6,15 +6,11 @@ namespace CarCare.Infraestructure.Persistence
     public class CarRepository:ICarRepository
     {
         private static readonly List<Car> _cars = new List<Car>();
-
-        public void AddCar(Car car)
-        {
+        public List<Car> GetCars() => _cars;
+        public Car? GetCarByRegistrationNumber(string registrationNumber) => 
+            _cars.FirstOrDefault(c => c.RegistrationNumber == registrationNumber);
+        public void AddCar(Car car) =>
             _cars.Add(car);
-        }
 
-        public Car? GetCarByRegistrationNumber(string registrationNumber)
-        {
-            return _cars.FirstOrDefault(c => c.RegistrationNumber == registrationNumber);
-        }
     }
 }

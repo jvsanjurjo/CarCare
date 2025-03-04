@@ -9,7 +9,8 @@ namespace CarCare.Application.Common.Interfaces.Persistence
 {
     public interface ICarRepository
     {
-        Car? GetCarByRegistrationNumber(string registrationNumber);
+        public List<Car> GetCars();
         void AddCar(Car car);
+        Car? GetCarByRegistrationNumber(string registrationNumber);
     }
 }
