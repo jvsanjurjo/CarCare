@@ -1,31 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CarCare.Application.Cars.Commands;
+using CarCare.Application.Cars.Queries;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CareCare.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class CarController : ControllerBase
     {
-        // GET: api/<CarController>
-        [HttpGet("listAll")]
-        public IEnumerable<string> ListCars()
+        private readonly IMediator _mediator;
+
+        public CarController(IMediator mediator)
         {
-            return new string[] { "car1", "car2" };
+            _mediator = mediator;
         }
 
-        // GET api/<CarController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        [HttpGet]
+        public Task<List<GetCarsQueryResponse>> GetCars() => _mediator.Send(new GetCarsQuery());
 
-        // POST api/<CarController>
+        [HttpGet("{RegistrationNumber}")]
+        public Task<GetCarQueryResponse> GetCarById([FromRoute] GetCarQuery query) =>
+        _mediator.Send(query);
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> CreateCar([FromBody] CreateCarCommand command)
         {
+            await _mediator.Send(command);
+
+            return Ok();
         }
 
         // PUT api/<CarController>/5
